@@ -1,0 +1,26 @@
+{
+  "name": "domaingistry_cli",
+  "version": "1.0.0",
+  "description": "A Simple Domain Name Generation CLI",
+  "main": "domaingistry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Domain",
+    "Name",
+    "Generation",
+    "name",
+    "generator",
+    "domaingistry"
+  ],
+  "author": "Jesse E.Agbe (JCharis)",
+  "license": "MIT",
+  "bin": {
+    "domaingistry": "./domaingistry.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.1"
+  }
+}
