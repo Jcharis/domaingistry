@@ -1,10 +1,15 @@
 {
-  "name": "domaingistry_cli",
-  "version": "1.0.0",
-  "description": "A Simple Domain Name Generation CLI",
+  "name": "domaingistry",
+  "version": "1.0.1",
+  "description": "A Simple Domain Name Generation Package and CLI",
   "main": "domaingistry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/Jcharis/domaingistry",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jcharis/domaingistry.git"
   },
   "keywords": [
     "Domain",

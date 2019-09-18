@@ -1,19 +1,23 @@
 ## DomainGistry - A Domain Name Generation CLI
-#### Built with Javascript
+
+DomainGistry is a domain name generation package and CLI.
+
+It's still in the early stages, so we're very interested in bug reports, contributions and the like.
 
 
 #### Requirements
++ nodejs
 + commander.js
 + chalk.js
-+ nodejs
+
 
 #### Installation
 
 
 #### Method 1
 
-+ Type the following to install
-```js
++ Using NPM
+```bash
 npm install domaingistry
 ```
 
@@ -22,18 +26,18 @@ npm install domaingistry
 + Download repository on github
 + Change into repository
 + Type the following to install
-```js
+```bash
 npm install 
 ```
 
-#### Usage
+### Usage As A CLI
 
-#### Local Usage
+#### Local Usage As A CLI
 ```js
 nodejs domaingistry.js --help
 ```
 
-#### Global Usage
+#### Global Usage As A CLI
 ```js
 domaingistry --help
 ```
@@ -41,12 +45,12 @@ domaingistry --help
 #### Generating Domain Names
 + Generate the domain name, shows you the common domain name generated, saves to a json file
 ```js
-nodejs domaingistry.js generate yourdomainname
+domaingistry generate yourdomainname
 ```
 or
 
 ```js
-nodejs domaingistry.js generate "yourdomainname"
+domaingistry generate "yourdomainname"
 ```
 
 ##### Screenshot
@@ -57,40 +61,93 @@ nodejs domaingistry.js generate "yourdomainname"
 + Generate the domain name per category and show it on the console
 
 #### Get Common Domain Names[.com,.org]
-```js
-nodejs domaingistry.js get-common "yourdomain name"
+```bash
+domaingistry get-common "yourdomain name"
 
 ```
 #### Get New Domain Names[.ai,.io]
-```js
-nodejs domaingistry.js get-new "yourdomain name"
+```bash
+domaingistry get-new "yourdomain name"
 
 ```
 
 #### Get Extra Domain Names[.tv,.media]
-```js
-nodejs domaingistry.js get-extra "yourdomain name"
+```bash
+domaingistry get-extra "yourdomain name"
 
 ```
 #### Get Prefixed Domain Names[myexample.com,theexample.com]
-```js
-nodejs domaingistry.js get-prefix "yourdomain name"
+```bash
+domaingistry get-prefix "yourdomain name"
 
 ```
 
 #### Get Suffixed Domain Names[exampleworld.com,examplify.com]
-```js
-nodejs domaingistry.js get-suffix "yourdomain name"
+```bash
+domaingistry get-suffix "yourdomain name"
 
 ```
 
 #### Get All Domain Names
-```js
-nodejs domaingistry.js get-all "yourdomain name"
+```bash
+domaingistry get-all "yourdomain name"
 
 ```
 
+### Usage As A Package
+##### Example 1
+```javascript
 
+const Domain = require('domaingistry');
+
+var domain1 = new Domain('yourdomainname','common')
+
+console.log(domain1.generate())
+```
+
+##### Example 2
+```javascript
+
+const Domain = require('domaingistry');
+
+var domain2 = new Domain();
+
+domain2.name = 'example';
+
+domain2.category = 'extra';
+
+console.log(domain2.generate())
+````
+
+### Generating Domain Names By Categories[common,new,extra,prefix,suffix]
+```javascript
+
+console.log(domain1.getCommon());
+
+console.log(domain1.getNew());
+
+console.log(domain1.getExtra());
+
+console.log(domain1.getPrefix());
+
+console.log(domain1.getSuffix());
+
+
+````
+
+
+#### Saving All Results of Categories to JSON
++ This creates a file with all the various categories of domain names generated in a json file
+
+```javascript
+
+var Domain = require('domaingistry');
+
+var domain = new Domain("example");
+
+domain.to_json()
+
+````
 
 #### Author
 + Jesse E.Agbe(JCharis)

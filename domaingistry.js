@@ -5,210 +5,14 @@ const fs = require('fs');
 program.version('0.0.1');
 
 
+// DATA
+var new_domain = ['app','site','online','xyz','tech','shop','blog','space','live','life','website','news','ninja','solutions','expert','services','media','rocks','company','guru','club','today','agency','technology','tips','center','link','click','ltd','win','work']
+var common_domain = ['com','edu','net','org','site','co','io','ai','app','ca','uk','ua','us','ru','ch']
+var extra_domain =["asia","africa","us","me","biz","info","name","mobi","cc","tv","ly","it","to","eu","ch","online"]
+var prefix_domain = ['a','i','e','the','my','me','we','top','best','get','co','nu','up','new','live','bestof','meta','just','99','101','insta','try','hit','go','re','dr','mr','bit','net','hot','beta','you','our','x','buy','for','pro','ez','on','v','hd','max','digi','free','very','all','easy','cool','air','next','find','uber']
+var suffix_domain = ["online.com","world.com","io.com","me.com","you.com","up.com","new.com","blog.com","web.com","hd.com","hq.com","tip.com","tips.com","guru.com","link.com","sumo.com","mob.com","lab.com","labs.com","list.com","info.com","jar.com","egg.com","site.com","app.com","apps.com","net.com","inc.com","247.com","360.com","24x7.com","corp.com","page.com","llc.com","now.com","all.com","box.com","base.com","zone.com","zoom.com","bit.com","bits.com","byte.com","bros.com","cart.com","sale.com","shop.com","store.com","free.com","soft.com","101.com","center.com","pro.com","pros.com","co.com","space.com","hub.com","spot.com","ware.com","talk.com","place.com","kit.com","pad.com","tool.com","bot.com","bots.com","bee.com","doc.com",".com","al.com","ity.com","iput.com","ally.com","ality.com","alness.com","ipital.com"]
 
-var new_domain = ['app',
-'site',
-'online',
-'xyz',
-'tech',
-'shop',
-'blog',
-'space',
-'live',
-'life',
-'website',
-'news',
-'ninja',
-'solutions',
-'expert',
-'services',
-'media',
-'rocks',
-'company',
-'guru',
-'club',
-'today',
-'agency',
-'technology',
-'tips',
-'center',
-'link',
-'click',
-'ltd',
-'win',
-'work']
-
-var common_domain = [
-'com',
-'edu',
-'net',
-'org',
-'site',
-'co',
-'io',
-'ai',
-'app',
-'ca',
-'uk',
-'ua',
-'us',
-'ru',
-'ch']
-
-var extra_domain =[
-"asia",
-"africa",
-"us",
-"me",
-"biz",
-"info",
-"name",
-"mobi",
-"cc",
-"tv",
-"ly",
-"it",
-"to",
-"eu",
-"ch",
-"online"]
-
-
-var prefix_domain = [
-'a',
-'i',
-'e',
-'the',
-'my',
-'me',
-'we',
-'top',
-'best',
-'get',
-'co',
-'nu',
-'up',
-'new',
-'live',
-'bestof',
-'meta',
-'just',
-'99',
-'101',
-'insta',
-'try',
-'hit',
-'go',
-'re',
-'dr',
-'mr',
-'bit',
-'net',
-'hot',
-'beta',
-'you',
-'our',
-'x',
-'buy',
-'for',
-'pro',
-'ez',
-'on',
-'v',
-'hd',
-'max',
-'digi',
-'free',
-'very',
-'all',
-'easy',
-'cool',
-'air',
-'next',
-'find',
-'uber',
-]
-
-var suffix_domain = [
-"online.com",
-"world.com",
-"io.com",
-"me.com",
-"you.com",
-"up.com",
-"new.com",
-"blog.com",
-"web.com",
-"hd.com",
-"hq.com",
-"tip.com",
-"tips.com",
-"guru.com",
-"link.com",
-"sumo.com",
-"mob.com",
-"lab.com",
-"labs.com",
-"list.com",
-"info.com",
-"jar.com",
-"egg.com",
-"site.com",
-"app.com",
-"apps.com",
-"net.com",
-"inc.com",
-"247.com",
-"360.com",
-"24x7.com",
-"corp.com",
-"page.com",
-"llc.com",
-"now.com",
-"all.com",
-"box.com",
-"base.com",
-"zone.com",
-"zoom.com",
-"bit.com",
-"bits.com",
-"byte.com",
-"bros.com",
-"cart.com",
-"sale.com",
-"shop.com",
-"store.com",
-"free.com",
-"soft.com",
-"101.com",
-"center.com",
-"pro.com",
-"pros.com",
-"co.com",
-"space.com",
-"hub.com",
-"spot.com",
-"ware.com",
-"talk.com",
-"place.com",
-"kit.com",
-"pad.com",
-"tool.com",
-"bot.com",
-"bots.com",
-"bee.com",
-"doc.com",
-".com",
-"al.com",
-"ity.com",
-"iput.com",
-"ally.com",
-"ality.com",
-"alness.com",
-"ipital.com"]
-
-
-
+// CLI
  // Functions For Generating Domain Names
 function generateCommonDomains(name){
 var new_name = name.split(" ").join("");
@@ -358,5 +162,115 @@ program
 
 program.parse(process.argv);
 
+ // Package
+class Domain{
+	constructor(name,category){
+		this.name = name;
+		this.category = category;
+	}
+
+	generate(){
+	var new_name = this.name.split(" ").join("");
+	 
+	 if (this.category == 'common') {
+	 	var common_list = common_domain.map(function(d){return `${new_name}.${d}`});
+	 	return common_list;
+	 } else if (this.category == 'new'){
+	 	var new_list = new_domain.map(function(d){return `${new_name}.${d}`});
+	 	return new_list;
+
+	 }
+	 else if (this.category == 'extra'){
+	 	var extra_list = extra_domain.map(function(d){return `${new_name}.${d}`});
+	 	return extra_list;
+
+	 }
+	 else if (this.category == 'prefix'){
+	 	var prefix_list = prefix_domain.map(function(d){return `${d}${new_name}.com`});
+	 	return prefix_list;
+
+	 }
+	 else if (this.category == 'suffix'){
+	 	 var suffix_list = suffix_domain.map(function(d){return `${new_name}${d}`});
+	 	return suffix_list;
+
+	 }
+
+	 else {
+	 var common_list = common_domain.map(function(d){return `${new_name}.${d}`});
+	 return common_list;
+	}
+}
+	 // Functions For Generating Domain Names
+	  getCommon(){
+	 var new_name = this.name.split(" ").join("");
+	  var new_list = common_domain.map(function(d){return `${new_name}.${d}`});
+	  return new_list;
+	 }
+
+	  getNew(){
+	 var new_name = this.name.split(" ").join("");
+	  var new_list = new_domain.map(function(d){return `${new_name}.${d}`});
+	  return new_list;
+	 }
+
+	  getSuffix(){
+	 var new_name = this.name.split(" ").join("");
+	  var new_list = suffix_domain.map(function(d){return `${new_name}${d}`});
+	  return new_list;
+	 }
+
+	  getPrefix(){
+	 var new_name = this.name.split(" ").join("");
+	  var new_list = prefix_domain.map(function(d){return `${d}${new_name}.com`})
+	  return new_list;
+	 }
+
+	 getExtra(){
+	 	var new_name = this.name.split(" ").join("");
+	  var new_list = extra_domain.map(function(d){return `${new_name}.${d}`});
+	  return new_list;
+	 }
+
+	  getAll(){
+	 	var new_name = this.name.split(" ").join("");
+	  var new_list = new_domain.map(function(d){return `${new_name}.${d}`});
+	  var common_list = common_domain.map(function(d){return `${new_name}.${d}`});
+	  var extra_list = extra_domain.map(function(d){return `${new_name}.${d}`});
+	  var prefix_list = prefix_domain.map(function(d){return `${d}${new_name}.com`});
+	  var suffix_list = suffix_domain.map(function(d){return `${new_name}${d}`});
+	  var all_list = {'common domains':common_list,
+	  'extra domains':extra_list,
+	  'new domains':new_list,
+	  'prefix domains':prefix_list,
+	  'suffix domains':suffix_list}
+	  return all_list;
+	 }
+
+	  to_json(){
+	  var new_name = this.name.split(" ").join("");
+	  var new_list = new_domain.map(function(d){return `${new_name}.${d}`});
+	  var common_list = common_domain.map(function(d){return `${new_name}.${d}`});
+	  var extra_list = extra_domain.map(function(d){return `${new_name}.${d}`});
+	  var prefix_list = prefix_domain.map(function(d){return `${d}${new_name}.com`});
+	  var suffix_list = suffix_domain.map(function(d){return `${new_name}${d}`});
+	  var all_list = {'common domains':common_list,
+	  'extra domains':extra_list,
+	  'new domains':new_list,
+	  'prefix domains':prefix_list,
+	  'suffix domains':suffix_list}
+	  return common_list;
+	  var filename = new_name + '_domain_names' + '.json'
+	  fs.writeFile(filename, JSON.stringify(all_list),'utf8', function (err) {
+	   if (err) throw err;
+	   console.log('Saved! Domain Names to ::',filename);
+	 });
+
+
+	 }
+ 
+}
+
+module.exports = Domain;
 
 
