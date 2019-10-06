@@ -1,10 +1,10 @@
 {
   "name": "domaingistry",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Simple Domain Name Generation Package and CLI",
   "main": "domaingistry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "homepage": "https://github.com/Jcharis/domaingistry",
   "repository": {
@@ -27,5 +27,8 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }

@@ -2,7 +2,7 @@
 const program = require('commander');
 const chalk = require('chalk');
 const fs = require('fs');
-program.version('0.0.1');
+program.version('1.0.2');
 
 
 // DATA
@@ -11,7 +11,7 @@ var common_domain = ['com','edu','net','org','site','co','io','ai','app','ca','u
 var extra_domain =["asia","africa","us","me","biz","info","name","mobi","cc","tv","ly","it","to","eu","ch","online"]
 var prefix_domain = ['a','i','e','the','my','me','we','top','best','get','co','nu','up','new','live','bestof','meta','just','99','101','insta','try','hit','go','re','dr','mr','bit','net','hot','beta','you','our','x','buy','for','pro','ez','on','v','hd','max','digi','free','very','all','easy','cool','air','next','find','uber']
 var suffix_domain = ["online.com","world.com","io.com","me.com","you.com","up.com","new.com","blog.com","web.com","hd.com","hq.com","tip.com","tips.com","guru.com","link.com","sumo.com","mob.com","lab.com","labs.com","list.com","info.com","jar.com","egg.com","site.com","app.com","apps.com","net.com","inc.com","247.com","360.com","24x7.com","corp.com","page.com","llc.com","now.com","all.com","box.com","base.com","zone.com","zoom.com","bit.com","bits.com","byte.com","bros.com","cart.com","sale.com","shop.com","store.com","free.com","soft.com","101.com","center.com","pro.com","pros.com","co.com","space.com","hub.com","spot.com","ware.com","talk.com","place.com","kit.com","pad.com","tool.com","bot.com","bots.com","bee.com","doc.com",".com","al.com","ity.com","iput.com","ally.com","ality.com","alness.com","ipital.com"]
-
+var sub_domain = ["account","adwords","afp","answers","api","app","bbs","blog","blogsearch","books","checkout","clients","clients1","cloud","code","dashboard","desktop","dev","dl","dns1","dns2","docs","earth","email","feedproxy","finance","forum","ftp","fusion","gmail","groups","host","images","mail","mail1","mail2","mailin1","mailin2","mailserver","manage","maps","mx","mx0","mx01","mx1","mx2","mx7","my","news","ns","ns1","ns2","ns3","ns4","owa","pack","partnerpage","picasa","picasaweb","pop","portal","r.1","r.2","r.3","redbusprimarydns","redbussecondarydns","remote","scholar","secure","secure","server","services","shop","sites","sketchup","smtp","spreadsheets","suggestqueries","support","talkgadget","test","toolbar","translate","video","video-stats.video","vpn","web","webmail","ww1","www"]
 // CLI
  // Functions For Generating Domain Names
 function generateCommonDomains(name){
@@ -39,6 +39,13 @@ function generatePrefixDomains(name){
 var new_name = name.split(" ").join("");
  var new_list = prefix_domain.map(function(d){return `${d}${new_name}.com`});
 console.log(chalk.white.bgBlue('Prefixed Domain Names'))
+ console.log(new_list)
+}
+
+function generateSubDomains(name){
+var new_name = name.split(" ").join("");
+ var new_list = sub_domain.map(function(d){return `${d}.${new_name}.com`});
+console.log(chalk.white.bgBlue('Sub Domain Names'))
  console.log(new_list)
 }
 
@@ -146,6 +153,12 @@ program
 .alias('gp')
 .action((name)=>generatePrefixDomains(name))
 
+program
+.command('get-subdomain <name>')
+.description('Get Sub Domain Names [eg blog.example.com,app.example.org ]')
+.alias('gsub')
+.action((name)=>generateSubDomains(name))
+
 
 program
 .command('get-all <name>')
@@ -195,6 +208,11 @@ class Domain{
 	 	return suffix_list;
 
 	 }
+	 	 else if (this.category == 'subdomain'){
+	 	var subdomain_list = sub_domain.map(function(d){return `${d}.${new_name}.com`});
+	 	return subdomain_list;
+
+	 }
 
 	 else {
 	 var common_list = common_domain.map(function(d){return `${new_name}.${d}`});
@@ -223,6 +241,12 @@ class Domain{
 	  getPrefix(){
 	 var new_name = this.name.split(" ").join("");
 	  var new_list = prefix_domain.map(function(d){return `${d}${new_name}.com`})
+	  return new_list;
+	 }
+
+	   getSubDomain(){
+	 var new_name = this.name.split(" ").join("");
+	  var new_list = sub_domain.map(function(d){return `${d}.${new_name}.com`})
 	  return new_list;
 	 }
 

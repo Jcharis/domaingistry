@@ -87,6 +87,11 @@ domaingistry get-prefix "yourdomain name"
 domaingistry get-suffix "yourdomain name"
 
 ```
+#### Get Sub Domain Names[blog.example.com,support.example.com]
+```bash
+domaingistry get-subdomain "yourdomain name"
+
+```
 
 #### Get All Domain Names
 ```bash
@@ -119,7 +124,7 @@ domain2.category = 'extra';
 console.log(domain2.generate())
 ````
 
-### Generating Domain Names By Categories[common,new,extra,prefix,suffix]
+### Generating Domain Names By Categories[common,new,extra,prefix,suffix,subdomain]
 ```javascript
 
 console.log(domain1.getCommon());
@@ -131,6 +136,8 @@ console.log(domain1.getExtra());
 console.log(domain1.getPrefix());
 
 console.log(domain1.getSuffix());
+
+console.log(domain1.getSubDomain());
 
 
 ````
